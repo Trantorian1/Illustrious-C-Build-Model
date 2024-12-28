@@ -69,7 +69,7 @@ build-debug: $(FILES_OBJS_D) $(FILES_DEPS_D)
 	@echo -e "building $(PASS)$(DIR_DEBUG)/$(BIN)$(RESET) - $(DIM)debug$(RESET)"
 	@$(C_COMPILER) $(C_WARNS) $(DEBUG) -o $(DIR_DEBUG)/$(BIN) $(FILES_OBJS_D)
 
-.PHONY: build-release
+PHONY: build-release
 build-release: $(FILES_OBJS_R) $(FILES_DEPS_R)
 	@echo -e "building $(PASS)$(DIR_RELEASE)/$(BIN)$(RESET)"
 	@$(C_COMPILER) $(C_WARNS) $(DEBUG) -o $(DIR_RELEASE)/$(BIN) $(FILES_OBJS_R)
@@ -99,6 +99,11 @@ clean: _confirm
 	@echo -e "removing $(WARN)all$(RESET) artefacts"
 	@rm -rf $(FILES_OBJS_D) $(FILES_DEPS_D) $(DIR_DEBUG)/$(BIN) \
 			$(FILES_OBJS_R) $(FILES_DEPS_R) $(DIR_RELEASE)/$(BIN)
+
+.PHONY: fmt
+fmt:
+	@echo -e "formatting all source files"
+	clang-format -i $(FILES_SRCS)
 
 .PHONY: _confirm
 _confirm:
